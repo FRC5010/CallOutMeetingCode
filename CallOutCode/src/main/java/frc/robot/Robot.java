@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+//Imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -19,6 +20,7 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  //variables
   private RobotContainer m_robotContainer;
   private RomiDrivetrain romiDrivetrain;
   private Joystick driver;
@@ -34,6 +36,7 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    //Initiallized functions
     romiDrivetrain = m_robotContainer.getDrive();
     driver = new Joystick(0);
   }
@@ -47,13 +50,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    //Getting axis values
     forward = driver.getRawAxis(1);
-    turn = driver.getRawAxis(0);
+    turn = driver.getRawAxis(4);
+    //Setting them to the driveTrain
     romiDrivetrain.arcadeDrive(forward, turn);
-    // Runs the Scheduler.  This is responsible for polling buttons, adding newly-scheduled
-    // commands, running already-scheduled commands, removing finished or interrupted commands,
-    // and running subsystem periodic() methods.  This must be called from the robot's periodic
-    // block in order for anything in the Command-based framework to work.
+    
     CommandScheduler.getInstance().run();
   }
 
